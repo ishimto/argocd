@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.weatherapp.service.name }}
+spec:
+  type: {{ .Values.weatherapp.service.type }}
+  selector:
+    app: {{ .Values.weatherapp.name }}
+  ports:
+  - protocol: {{ .Values.weatherapp.service.protocol }}
+    port: {{ .Values.weatherapp.service.port }}
+    targetPort: {{ .Values.weatherapp.service.targetPort }}

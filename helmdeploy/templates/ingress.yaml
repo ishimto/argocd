@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: default
+spec:
+  ingressClassName: {{ .Values.ingress.classname }}
+  rules:
+    - host: {{ .Values.ingress.weatherapp.host  }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Values.weatherapp.service.name }}
+              port:
+                number: {{ .Values.weatherapp.service.port }}
+

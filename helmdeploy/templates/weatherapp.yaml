@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.weatherapp.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.weatherapp.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.weatherapp.name }}
+    spec:
+      containers:
+      - name: {{ .Values.weatherapp.name }}
+        image: {{ .Values.weatherapp.image }}
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.weatherapp.config.name }}
+      imagePullSecrets:
+      - name: docker-cred
