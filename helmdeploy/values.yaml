@@ -4,21 +4,16 @@ weatherapp:
     name: green-configmap
   image:
     name: gingerous/weatherapp_k8s
-    tag: "1.0.0"
+    tag: 1.0.1
   service:
     name: weatherapp-service
     type: ClusterIP
     protocol: TCP
     port: 80
     targetPort: 8000
-
 ingress:
   name: applications-ingress
   classname: nginx
   weatherapp:
     host: weather.ginger-ous.click
-
-
 replicaCount: 2
-
-
