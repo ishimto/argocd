@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.weatherapp.name }}
-        image: {{ .Values.weatherapp.image }}
+        image: "{{ .Values.weatherapp.image.name }}:{{ .Values.weatherapp.image.tag }}"
         envFrom:
         - configMapRef:
             name: {{ .Values.weatherapp.config.name }}
