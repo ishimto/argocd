@@ -1,9 +1,21 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ .Values.weatherapp.name }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {}
+      - setWeight: 40
+      - pause: {duartion: 10}
+      - setWeight: 60
+      - pause: {duartion: 10}
+      - setWeight: 80
+      - pause: {duartion: 10}
+      - setWeight: 100
   selector:
     matchLabels:
       app: {{ .Values.weatherapp.name }}
