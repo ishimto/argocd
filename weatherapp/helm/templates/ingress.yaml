@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
   namespace: default
+  annotations:
+    alb.ingress.kubernetes.io/scheme: "internet-facing"
 spec:
   ingressClassName: {{ .Values.ingress.classname }}
   rules:

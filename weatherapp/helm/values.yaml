@@ -13,7 +13,7 @@ weatherapp:
     targetPort: 8000
 ingress:
   name: applications-ingress
-  classname: nginx
+  classname: alb
   weatherapp:
     host: weather.ginger-ous.click
 replicaCount: 4
