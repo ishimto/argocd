@@ -108,7 +108,7 @@ Access it at [localhost:1234](http://localhost:1234).
 
 ## Additional Notes
 
-- Ensure all sensitive files (secrets, API keys) are excluded from version control.
+- Ensure all sensitive files (secrets, API keys) are excluded from version control (e.g .gitignore).
 - For troubleshooting, check ArgoCD and Argo Rollouts documentation.
 
 ---
