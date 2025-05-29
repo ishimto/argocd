@@ -3,8 +3,8 @@ weatherapp:
   config:
     name: green-configmap
   image:
-    name: gingerous/weatherapp_k8s
-    tag: 1.0.3
+    name: registry.gitlab.com/gingeroot1/circleci/web_app
+    tag: latest
   service:
     name: weatherapp-service
     type: ClusterIP
