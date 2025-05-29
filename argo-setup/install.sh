@@ -16,6 +16,7 @@ init_passowrd=""
 
 while true
 do
+    sleep 3
     init_password=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
     if [[ -z ${init_password} ]]; then
         continue

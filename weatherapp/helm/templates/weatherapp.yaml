@@ -29,6 +29,12 @@ spec:
         image: "{{ .Values.weatherapp.image.name }}:{{ .Values.weatherapp.image.tag }}"
         envFrom:
         - configMapRef:
-            name: {{ .Values.weatherapp.config.name }}
+            name: {{ .Values.weatherapp.config.global }}
+        - configMapRef:
+            name: {{ .Values.weatherapp.config.bg }}
+        - configMapRef:
+            name: {{ .Values.weatherapp.config.api }}
+        - configMapRef:
+            name: {{ .Values.weatherapp.config.flags }}
       imagePullSecrets:
       - name: docker-cred

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flags-cm
+data:
+  FLAGS_APP: test
+  FLAGS_URL: https://gitlab.com/api/v4/feature_flags/unleash/67233665
+  FLAGS_instanceID: glffct-5EHUFoFawMHsRsSufw9s
