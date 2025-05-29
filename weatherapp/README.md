@@ -8,7 +8,7 @@
 
 * [edit values.yaml](https://github.com/ishimto/argocd/tree/main/weatherapp/helm)
 
-* create secrets.yaml with this yaml template:
+* create this templates:
 
 ```
 apiVersion: v1
@@ -17,11 +17,24 @@ metadata:
   name: docker-cred
 data:
   .dockerconfigjson: |
-     < your docker cred here >
+     <your docker credentials here base64 encoded>
 type: kubernetes.io/dockerconfigjson
 
 ```
-make sure the secrets.yaml file is in your .gitignore to avoid mistakes.
+
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: weatherapikey-cm
+data:
+  API_KEY: <WEATHER API KEY HERE>
+
+```
+
+
+make sure the files is in your .gitignore to avoid mistakes.
 
 
 ## ArgoCD App
