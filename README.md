@@ -1,7 +1,26 @@
-# ArgoCD repo
+# ArgoCD GitOps Repository
 
-This repo using ArgoCD Tool in Gitops architecture.
+This repository demonstrates GitOps workflows using [ArgoCD](https://argo-cd.readthedocs.io/) and [Argo Rollouts](https://argoproj.github.io/argo-rollouts/) for advanced Kubernetes deployment strategies.
 
-To install ArgoCD + Argo Rollouts use [this script](https://github.com/ishimto/argocd/blob/main/argo-setup/install.sh).
+## Structure
 
-There is a README in each directory to explain what going on over there.
+- `argo-setup/` – Scripts and manifests to install ArgoCD and Argo Rollouts
+- `weatherapp/` – Example Helm chart and ArgoCD application for a sample WeatherApp
+
+## Quick Start
+
+To install ArgoCD and Argo Rollouts, run the [install script](./argo-setup/install.sh):
+
+```sh
+bash ./argo-setup/install.sh
+```
+
+See the [argo-setup README](./argo-setup/README.md) for details.
+
+## More Information
+
+Each directory contains its own README with specific instructions and explanations.
+
+---
+
+Feel free to contribute or open issues for questions and improvements!
