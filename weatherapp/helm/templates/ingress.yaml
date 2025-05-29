@@ -3,17 +3,11 @@ kind: Ingress
 metadata:
   name: {{ .Values.ingress.name }}
   namespace: default
-<<<<<<< HEAD
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-=======
->>>>>>> parent of 7870734 (check eks auto mode ingress)
 spec:
   ingressClassName: {{ .Values.ingress.classname }}
   rules:
-    #- host: {{ .Values.ingress.weatherapp.host  }}
-    - http:
+    - host: {{ .Values.ingress.weatherapp.host  }}
+      http:
         paths:
         - path: /
           pathType: Prefix
