@@ -1,7 +1,7 @@
 weatherapp:
   name: weatherapp
   config:
-    name: blue-configmap
+    name: green-configmap
   image:
     name: registry.gitlab.com/gingeroot1/circleci/web_app
     tag: latest
