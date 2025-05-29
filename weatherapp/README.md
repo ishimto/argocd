@@ -1,77 +1,84 @@
-# WeatherApp
+# WeatherApp Helm Chart
 
-## Prerequisite
+This Helm chart deploys the WeatherApp using ArgoCD and supports advanced deployment strategies with Argo Rollouts.
 
-* [Install ArgoCD + Argo Rollouts](https://github.com/ishimto/argocd/tree/main/argo-setup)
+---
 
-* [Build This Project](https://github.com/ishimto/weatherapp/tree/main/app_docker_nginx/app)
+## Prerequisites
 
-* [edit values.yaml](https://github.com/ishimto/argocd/tree/main/weatherapp/helm)
+- [ArgoCD & Argo Rollouts Installed](https://github.com/ishimto/argocd/tree/main/argo-setup)
+- [WeatherApp Docker Image Built](https://github.com/ishimto/weatherapp/tree/main)
+- Kubernetes cluster access with `kubectl`, `argocd` CLI installed, `argo rollouts` CLI installed.
 
-* create this templates:
+---
 
-```
+## Setup Instructions
+
+### 1. Configure Secrets and ConfigMaps
+
+Create the following Kubernetes resources before deploying:
+
+**Docker Registry Secret**
+```yaml
 apiVersion: v1
 kind: Secret
 metadata:
   name: docker-cred
-data:
-  .dockerconfigjson: |
-     <your docker credentials here base64 encoded>
 type: kubernetes.io/dockerconfigjson
-
+data:
+  .dockerconfigjson: <your base64-encoded docker config>
 ```
 
-
-```
+**Weather API Key ConfigMap**
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: weatherapikey-cm
 data:
-  API_KEY: <WEATHER API KEY HERE>
-
+  API_KEY: <YOUR_WEATHER_API_KEY>
 ```
 
+> **Note:**  
+> Add these files to your `.gitignore` to avoid committing sensitive data.
 
-make sure the files is in your .gitignore to avoid mistakes.
+---
 
+### 2. Configure `values.yaml`
 
-## ArgoCD App
+Edit the [values.yaml](./helm/values.yaml) file to set image tags, replica counts, and other configuration options as needed.
 
-### Prerequisite
+---
 
-create PAT to your repo with at least privileaged as needed, just read repository.
+### 3. Add Your Git Repository to ArgoCD
 
-config your git repo in ArgoCD using argo-cli:
+Create a Personal Access Token (PAT) with at least read access to your repository.
 
+Add your repo to ArgoCD:
+```sh
+argocd repo add <REPO_URL> --username <YOUR_GIT_USERNAME> --password <PAT>
 ```
-argocd repo add <REPO URL> --username <YOUR GIT USERNAME> --password <PAT>
-```
+Or use [declarative setup](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/).
 
-or [Declarative](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
+---
 
+### 4. Deploy the ArgoCD Application
 
-### Create ArgoCD App
-
-run in current dir:
-
-```
+Apply the ArgoCD application manifest:
+```sh
 kubectl apply -f argoproj-app.yaml
 ```
 
+---
 
+## Deployment Strategy: Canary (with Argo Rollouts)
 
-### Deployment Strategy: Canary
+This chart uses a canary deployment strategy, managed by Argo Rollouts. Example configuration in the Helm template:
 
-This argoproj app using Canary deployment strategy, explain:
-
-configured in weatherapp template:
-
-```
-  strategy:
-    canary:
-      steps:
+```yaml
+strategy:
+  canary:
+    steps:
       - setWeight: 20
       - pause: {}
       - setWeight: 40
@@ -83,23 +90,30 @@ configured in weatherapp template:
       - setWeight: 100
 ```
 
-setWeight means how much Pods create in each time, first it will create 20% of replicas, then stop until you'll promote it.
+- **setWeight**: Percentage of traffic shifted to the new version.
+- **pause**: Waits for manual promotion or specified duration.
 
-```
-kubectl argo rollouts promote <rollout name> -n <namespace>
-```
-
-or go to your:
-
-```
-localhost:1234
+Promote the rollout manually:
+```sh
+kubectl argo rollouts promote <rollout-name> -n <namespace>
 ```
 
-also you can open argo rollouts dashboard for better view:
-
-```
+Or use the Argo Rollouts dashboard for visualization:
+```sh
 kubectl argo rollouts dashboard
 ```
+Access it at [localhost:1234](http://localhost:1234).
 
+---
 
-after this promote it will promote it self after 10 seconds each promote until 100% weight promote.
+## Additional Notes
+
+- Ensure all sensitive files (secrets, API keys) are excluded from version control.
+- For troubleshooting, check ArgoCD and Argo Rollouts documentation.
+
+---
+
+## References
+
+- [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
+- [Argo Rollouts Documentation](https://argoproj.github.io/argo-rollouts/)
