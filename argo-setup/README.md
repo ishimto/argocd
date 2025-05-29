@@ -1,33 +1,47 @@
-# Setup ArgoCD
+# ArgoCD & Argo Rollouts Setup
 
-## Prerequisite
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Accessing ArgoCD](#accessing-argocd)
+- [Uninstall](#uninstall)
+- [References](#references)
 
-Cluster (minikube, eks, whatever)
+## Prerequisites
 
-[install argocd cli](https://argo-cd.readthedocs.io/en/stable/cli_installation/) 
-[install argo rollout cli](https://argo-rollouts.readthedocs.io/en/stable/installation/)
+- Kubernetes cluster (e.g., Minikube, EKS, etc.)
+- [ArgoCD CLI](https://argo-cd.readthedocs.io/en/stable/cli_installation/)
+- [Argo Rollouts CLI](https://argo-rollouts.readthedocs.io/en/stable/installation/)
 
-## Install 
-In order to set-up your cluster with Argo use the following script:
+## Installation
 
-```
+To set up your cluster with ArgoCD and Argo Rollouts, run:
+```sh
 bash ./install.sh
 ```
+This script will:
+- Install **ArgoCD** (GitOps tool)
+- Install **Argo Rollouts** (advanced deployment strategies)
+- Log in to your ArgoCD server for CLI usage
+- Open a port-forward to the ArgoCD UI at [localhost:1234](http://localhost:1234)
 
-it will install:
+## Accessing ArgoCD
 
-ArgoCD - GitOps tool
+- Web UI: [http://localhost:1234](http://localhost:1234)
+- Default username: `admin`
+- To get the initial password:
+  ```sh
+  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+  ```
 
-Argo Rollouts
+## Uninstall
 
-* In order to use more [extended features](https://argoproj.github.io/argo-rollouts/) in k8s such as more deployment strategies
-
-it will login to your argocd server in order to use argo cli, and open port-forward to localhost:1234
-
-
-
-# Delete
-
-```
+To remove ArgoCD and Argo Rollouts from your cluster:
+```sh
 bash ./delete.sh
 ```
+
+## References
+
+- [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
+- [Argo Rollouts Documentation](https://argoproj.github.io/argo-rollouts/)
