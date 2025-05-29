@@ -20,7 +20,7 @@ ArgoCD - GitOps tool
 
 Argo Rollouts
 
-* In order to use more strategies in your deployment, uses with kind: Rollout
+* In order to use more [extended features](https://argoproj.github.io/argo-rollouts/) in k8s such as more deployment strategies
 
 it will login to your argocd server in order to use argo cli, and open port-forward to localhost:1234
 
