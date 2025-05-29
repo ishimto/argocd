@@ -16,4 +16,4 @@ ingress:
   classname: nginx
   weatherapp:
     host: weather.ginger-ous.click
-replicaCount: 10
+replicaCount: 4
