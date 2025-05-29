@@ -8,8 +8,8 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.classname }}
   rules:
-    - host: {{ .Values.ingress.weatherapp.host  }}
-      http:
+    #- host: {{ .Values.ingress.weatherapp.host  }}
+    - http:
         paths:
         - path: /
           pathType: Prefix
