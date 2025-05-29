@@ -5,7 +5,7 @@
 Cluster (minikube, eks, whatever)
 
 [install argocd cli](https://argo-cd.readthedocs.io/en/stable/cli_installation/) 
-
+[install argo rollout cli](https://argo-rollouts.readthedocs.io/en/stable/installation/)
 
 ## Install 
 In order to set-up your cluster with Argo use the following script:
