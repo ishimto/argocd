@@ -20,3 +20,4 @@ ingress:
   weatherapp:
     host: weather.ginger-ous.click
 replicaCount: 4
+APP_VERSION: 1.1.0
