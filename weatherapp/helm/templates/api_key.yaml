@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: {{ .Values.secrets.weatherapp.name }}
+spec:
+  refreshInterval: {{ .Values.secrets.weatherapp.refresh }}
+  secretStoreRef:
+    name: {{ .Values.secrets.vault.name }}
+    kind: SecretStore
+  target:
+    name: {{ .Values.secrets.weatherapp.target.name }}
+    creationPolicy: Owner
+  data:
+  - secretKey: {{ .Values.secrets.weatherapp.key.name }}
+    remoteRef:
+      key: {{ .Values.secrets.vault.key.path }}
+      property: {{ .Values.secrets.vault.key.property }}
