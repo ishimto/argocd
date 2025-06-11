@@ -13,7 +13,32 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: {{ .Values.weatherapp.service.name }}
+              name: {{ .Values.weatherapp.service.stable.name }}
               port:
-                number: {{ .Values.weatherapp.service.port }}
+                number: {{ .Values.weatherapp.service.stable.port }}
+
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}-canary
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/canary-by-weight: "true"
+    nginx.ingress.kubernetes.io/canary: "true"
+spec:
+  ingressClassName: {{ .Values.ingress.classname }}
+  rules:
+    - host: {{ .Values.ingress.weatherapp.host }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: {{ .Values.weatherapp.service.canary.name }}
+              port:
+                number: {{ .Values.weatherapp.service.canary.port }}
 

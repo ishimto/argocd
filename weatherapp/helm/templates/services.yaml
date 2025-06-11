@@ -1,12 +1,27 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.weatherapp.service.name }}
+  name: {{ .Values.weatherapp.service.stable.name }}
 spec:
-  type: {{ .Values.weatherapp.service.type }}
+  type: {{ .Values.weatherapp.service.stable.type }}
   selector:
     app: {{ .Values.weatherapp.name }}
   ports:
-  - protocol: {{ .Values.weatherapp.service.protocol }}
-    port: {{ .Values.weatherapp.service.port }}
-    targetPort: {{ .Values.weatherapp.service.targetPort }}
+  - protocol: {{ .Values.weatherapp.service.stable.protocol }}
+    port: {{ .Values.weatherapp.service.stable.port }}
+    targetPort: {{ .Values.weatherapp.service.stable.targetPort }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.weatherapp.service.canary.name }}
+spec:
+  type: {{ .Values.weatherapp.service.canary.type }}
+  selector:
+    app: {{ .Values.weatherapp.name }}
+  ports:
+  - protocol: {{ .Values.weatherapp.service.canary.protocol }}
+    port: {{ .Values.weatherapp.service.canary.port }}
+    targetPort: {{ .Values.weatherapp.service.canary.targetPort }}

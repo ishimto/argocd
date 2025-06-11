@@ -6,6 +6,8 @@ spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
     canary:
+      canaryService: {{ .Values.weatherapp.service.canary.name }}
+      stableService: {{ .Values.weatherapp.service.stable.name }}
       steps:
       - setWeight: 20
       - pause: {}
