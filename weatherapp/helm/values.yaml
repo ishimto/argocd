@@ -21,6 +21,27 @@ weatherapp:
       protocol: TCP
       port: 80
       targetPort: 8000
+
+
+secrets:
+  weatherapp:
+    name: weatherapp-secret
+    refresh: 30s
+    target:
+      name: weatherapp-secret-env
+    key:
+      name: API_KEY
+
+  vault:
+    name: vault-backend
+    server: "http://vault.default.svc.cluster.local:8200"
+    key:
+      path: weatherapp
+      property: WEATHER_API_KEY
+    auth:
+      name: vault-token
+      key: token
+
 ingress:
   name: applications-ingress
   classname: nginx

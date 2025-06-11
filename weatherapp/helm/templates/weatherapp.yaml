@@ -30,12 +30,12 @@ spec:
       - name: {{ .Values.weatherapp.name }}
         image: "{{ .Values.weatherapp.image.name }}:{{ .Values.weatherapp.image.tag }}"
         envFrom:
+        - secretRef:
+            name: {{ .Values.secrets.weatherapp.target.name }}
         - configMapRef:
             name: {{ .Values.weatherapp.config.global }}
         - configMapRef:
             name: {{ .Values.weatherapp.config.bg }}
-        - configMapRef:
-            name: {{ .Values.weatherapp.config.api }}
         - configMapRef:
             name: {{ .Values.weatherapp.config.flags }}
       imagePullSecrets:
