@@ -15,4 +15,3 @@
 !*.tpl
 .venv
 secret*
-#api*

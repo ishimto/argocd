@@ -34,7 +34,9 @@ secrets:
 
   vault:
     name: vault-backend
-    server: "http://vault.default.svc.cluster.local:8200"
+    server: "http://vault.vault.svc.cluster.local:8200"
+    path: "secret"
+    version: "v1" # Replace it to v2 if you create secret version 2.
     key:
       path: weatherapp
       property: WEATHER_API_KEY

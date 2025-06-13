@@ -8,6 +8,8 @@ This Helm chart deploys the WeatherApp using ArgoCD and supports advanced deploy
 
 - [ArgoCD & Argo Rollouts Installed](https://github.com/ishimto/argocd/tree/main/argo-setup)
 - [WeatherApp Docker Image Built](https://github.com/ishimto/weatherapp/tree/main)
+- [External Secrets Operator](../eso-setup)
+- [Vault](../vault-setup)
 - Kubernetes cluster access with `kubectl`, `argocd` CLI installed, `argo rollouts` CLI installed.
 
 ---
@@ -29,18 +31,22 @@ data:
   .dockerconfigjson: <your base64-encoded docker config>
 ```
 
-**Weather API Key ConfigMap**
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: weatherapikey-cm
-data:
-  API_KEY: <YOUR_WEATHER_API_KEY>
+> **Note:**  
+> Add these file to your `.gitignore` to avoid committing sensitive data.
+
+
+**Vault**
+[Create Secret](https://developer.hashicorp.com/vault/docs/secrets/kv) in secret/weatherapp with WEATHER_API_KEY
+
+
+Giving access to vault for helm chart
+
+```sh
+kubectl create secret generic vault-token --from-literal=token=<your vault token> 
 ```
 
-> **Note:**  
-> Add these files to your `.gitignore` to avoid committing sensitive data.
+> **Note:**
+> These helm chart support v1 secret engine version, it can be replaced in [values.yaml](./helm/values.yaml)
 
 ---
 

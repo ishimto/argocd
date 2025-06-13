@@ -6,7 +6,7 @@ spec:
   refreshInterval: {{ .Values.secrets.weatherapp.refresh }}
   secretStoreRef:
     name: {{ .Values.secrets.vault.name }}
-    kind: SecretStore
+    kind: ClusterSecretStore
   target:
     name: {{ .Values.secrets.weatherapp.target.name }}
     creationPolicy: Owner
