@@ -16,9 +16,12 @@
 ## Installation
 
 To set up your cluster with ArgoCD and Argo Rollouts, run:
+
 ```sh
-bash ./install.sh
+bash ./cd.sh
+bash ./rollouts.sh
 ```
+
 This script will:
 - Install **ArgoCD** (GitOps tool)
 - Install **Argo Rollouts** (advanced deployment strategies)

@@ -4,18 +4,14 @@ This repository demonstrates GitOps workflows using [ArgoCD](https://argo-cd.rea
 
 ## Structure
 
-- `argo-setup/` – Scripts and manifests to install ArgoCD and Argo Rollouts
+- `run.sh` - installation menu for components to the cluster
 - `weatherapp/` – Example Helm chart and ArgoCD application for a sample WeatherApp
 
 ## Quick Start
 
-To install ArgoCD and Argo Rollouts, run the [install script](./argo-setup/install.sh):
-
 ```sh
-bash ./argo-setup/install.sh
+bash ./run.sh
 ```
-
-See the [argo-setup README](./argo-setup/README.md) for details.
 
 ## More Information
 
